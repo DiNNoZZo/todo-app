@@ -57,7 +57,7 @@ const TodoFilter = () => {
       </div>
       <div className="flex flex-col bg-white dark:bg-slate-300 rounded-md shadow-md p-5">
         <div
-          className="flex items-center justify-center"
+          className="flex items-center justify-center hover:cursor-pointer"
           onClick={handleOpenFilterToggle}
         >
           <H3>Filter</H3>

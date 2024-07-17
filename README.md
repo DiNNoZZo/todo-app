@@ -22,6 +22,7 @@ To get started with this project, follow these steps:
 3. **Start the development server:**
 
     ```bash
+    npm run build
     npm start
 
     #or
