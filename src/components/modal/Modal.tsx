@@ -10,7 +10,7 @@ interface IModal extends IComponent {
 }
 
 const Modal: FC<IModal> = ({ isOpen, onClose, children, header }) => {
-  const destination = document.getElementById('modal-root');
+  const destination = typeof window !== 'undefined' && document.getElementById('modal-root');
 
   if (!isOpen || !destination) return null;
 

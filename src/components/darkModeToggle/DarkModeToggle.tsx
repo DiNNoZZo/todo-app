@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { IComponent } from '@/types/global.types';
 import React, { FC, useContext, useEffect } from 'react';
@@ -15,8 +15,13 @@ const DarkModeToggle: FC<IComponent> = ({ className }) => {
   const { updateAppState } = useContext(AppApiContext);
 
   useEffect(() => {
-    if (darkMode) document.documentElement.classList.add('dark');
-    if (!darkMode) document.documentElement.classList.remove('dark');
+    if (typeof window !== 'undefined') {
+      if (darkMode) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
   }, [darkMode]);
 
   return (
