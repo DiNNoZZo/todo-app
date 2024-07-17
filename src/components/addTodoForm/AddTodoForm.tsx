@@ -18,7 +18,7 @@ const AddTodoForm: FC<IAddTodoForm> = ({
   handleRecordSave,
   handleClearForm,
 }) => {
-  const { register, control } = useFormContext<TTodoSchema>();
+  const { register, control, formState: {errors} } = useFormContext<TTodoSchema>();
 
   return (
     <>
@@ -27,30 +27,35 @@ const AddTodoForm: FC<IAddTodoForm> = ({
           {...register('description')}
           textColor="text-text-light"
           label="Description"
+          error={errors.description?.message}
         />
         <Select
           {...register('priority')}
           textColor="text-text-light"
           options={priorityOptions}
           label="Priority"
+          error={errors.priority?.message}
         />
         <Select
           {...register('category')}
           textColor="text-text-light"
           options={categoriyOptions}
           label="Category"
+          error={errors.category?.message}
         />
         <Input
           {...register('note')}
           textColor="text-text-light"
           label="Notes"
+          error={errors.note?.message}
         />
         <Input
           {...register('assignedTo')}
           textColor="text-text-light"
           label="Assigned to"
+          error={errors.assignedTo?.message}
         />
-        <DatePicker control={control} label="Due Date" name="dueDate" />
+        <DatePicker errorMess={errors.dueDate?.message?.toString()} control={control} label="Due Date" name="dueDate" />
       </div>
       <div className="flex space-x-5 mt-5">
         <Button

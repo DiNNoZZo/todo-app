@@ -38,7 +38,6 @@ const AppProvider: FC<IComponent<ReactNode>> = ({ children }): JSX.Element => {
 
   const saveTodoList = useCallback(async () => {
     const data = (await getTodoList(appState?.filters)) || [];
-    console.log('data', data);
 
     updateAppState({ todoList: data });
   }, [updateAppState, appState?.filters]);

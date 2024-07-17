@@ -9,7 +9,6 @@ interface IInput extends IComponent, React.InputHTMLAttributes<HTMLInputElement>
   type?: string;
 }
 
-// Použitie forwardRef na pripojenie ref z react-hook-form
 const Input: FC<IInput> = forwardRef<HTMLInputElement, IInput>(
   (
     {

@@ -1,6 +1,6 @@
 import { dateTimeDisplayFormat } from "@/constants/index.constants";
 import { formatDate } from "@/lib/helpers";
-import { isBefore, isFuture, isValid } from "date-fns";
+import { isBefore, isValid } from "date-fns";
 import { z } from "zod";
 import { todoValidationFields } from "./todo.validation";
 
@@ -25,9 +25,9 @@ const dateValidation = ({
 }: IDateValidation): string => {
   const date = value && new Date(value);
   let message: string = '';
-  if (!date || !isValid(date)) message = 'musí byť korektne zadaný';
+  if (!date || !isValid(date)) message = 'must be entered correctly';
   if (date && isBefore(date, minDate))
-    message = `nesmie byť menší ako ${formatDate(minDate, dateTimeDisplayFormat )}`;
+    message = `must not be less than ${formatDate(minDate, dateTimeDisplayFormat )}`;
 
   return message;
 };
@@ -42,11 +42,11 @@ const checkValDate = ({ ctx, val, valNames, maxDate, maxOfValue, minDate, withTi
         ? {
             path,
             code: z.ZodIssueCode.custom,
-            message: `Pole "${name}" ${validMessage}`,
+            message: `Field "${name}" ${validMessage}`,
           }
         : {
             code: z.ZodIssueCode.custom,
-            message: `Pole "${name}" ${validMessage}`,
+            message: `Field "${name}" ${validMessage}`,
           },
     );
 };

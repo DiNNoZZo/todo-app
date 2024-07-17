@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useContext, useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 import { AppApiContext, AppDataContext } from '@/context/AppContext';
 import Button from '@/components/button/Button';
 import TodoItem from '@/components/todoItem/TodoItem';
 import Modal from '@/components/modal/Modal';
 import AddTodoForm from '@/components/addTodoForm/AddTodoForm';
 import TodoFilter from '@/components/filter/TodoFilter';
-import { FormProvider, useForm } from 'react-hook-form';
+import { defaultValuesTodo } from '@/constants/index.constants';
 import { TTodoSchema, todoSchema } from '@/validation/todo.validation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TMode } from '@/types/global.types';
@@ -18,7 +19,6 @@ import {
   editTodoItem,
   getTodoById,
 } from '@/api/todoApi';
-import { defaultValuesTodo } from '@/constants/index.constants';
 
 const Home: React.FC = () => {
   const {
@@ -31,14 +31,7 @@ const Home: React.FC = () => {
   const formMethods = useForm<TTodoSchema>({
     resolver: zodResolver(todoSchema),
   });
-  const {
-    handleSubmit,
-    trigger,
-    getValues,
-    setValue,
-    reset,
-    formState: { errors },
-  } = formMethods;
+  const { handleSubmit, trigger, getValues, setValue, reset } = formMethods;
 
   const handleRecordSave = async () => {
     mode === 'Add' && setValue('complete', false);
@@ -74,9 +67,6 @@ const Home: React.FC = () => {
   };
 
   const handleEditTodo = async (id: string) => {
-    const filterUrl = new URL(`${apiUrl}`);
-    filterUrl.searchParams.append('id', id);
-
     const currTodo = await getTodoById(id);
 
     reset(currTodo);

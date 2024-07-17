@@ -16,14 +16,14 @@ interface IDatePicker<
     IComponent {
   textColor?: string;
   label?: string;
-  error?: string;
+  errorMess?: string;
 }
 
 const DatePicker = <
   TFieldValues extends FieldValues = FieldValues,
   TFieldName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >({
-  error,
+  errorMess,
   label,
   textColor,
   className,
@@ -33,7 +33,6 @@ const DatePicker = <
   return (
     <label className={`flex flex-col transition ${textColor}`}>
       {label && <span>{label}</span>}
-      {error && <span>{error}</span>}
       <Controller
         name={name}
         control={control}
@@ -45,6 +44,7 @@ const DatePicker = <
           />
         )}
       />
+      {errorMess && <span className="text-red-500">{errorMess}</span>}
     </label>
   );
 };
